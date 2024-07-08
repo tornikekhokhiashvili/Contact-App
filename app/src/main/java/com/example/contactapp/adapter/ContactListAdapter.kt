@@ -18,24 +18,16 @@ class ContactListAdapter (
     override fun getCount(): Int {
         return contacts.size
     }
-
     override fun getItem(position: Int): Any {
         return contacts[position]
     }
-
     override fun getItemId(position: Int): Long {
         return position.toLong()
     }
-
     override fun getView(position: Int, convertView: View?, parent: ViewGroup?): View {
         val contact = getItem(position) as Contact
         val inflater = LayoutInflater.from(context)
-        val view: View
-        if (convertView == null) {
-            view = inflater.inflate(R.layout.item_view, parent, false)
-        } else {
-            view = convertView
-        }
+        val view: View = convertView ?: inflater.inflate(R.layout.item_view, parent, false)
         val nameTextView = view.findViewById<TextView>(R.id.nameTextView)
         val phoneTextView = view.findViewById<TextView>(R.id.phoneTextView)
         val imageView = view.findViewById<ImageView>(R.id.imageView)
@@ -46,8 +38,6 @@ class ContactListAdapter (
         } else {
             imageView.setImageResource(R.drawable.default_contact_image)
         }
-
-
         return view
     }
 

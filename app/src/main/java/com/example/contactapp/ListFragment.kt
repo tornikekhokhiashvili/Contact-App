@@ -11,7 +11,7 @@ import android.widget.ListView
 import com.example.contactapp.adapter.ContactListAdapter
 
 class ListFragment : Fragment() {
-    lateinit var listView: ListView
+    private lateinit var listView: ListView
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
@@ -19,11 +19,11 @@ class ListFragment : Fragment() {
         val rootView = inflater.inflate(R.layout.fragment_list, container, false)
         listView = rootView.findViewById(R.id.listview)
         ContactUtils.readContacts(requireContext().contentResolver)
-        val adapter = ContactListAdapter(requireContext(), ContactUtils.contactsList)
+        val adapter = ContactListAdapter(requireContext(), ContactUtils.contactsList.distinct())
         listView.adapter = adapter
-        listView.setOnItemClickListener { adapterView, view, i, l ->
+        listView.setOnItemClickListener { _, _, i, _ ->
             val clickedContact = ContactUtils.contactsList[i]
-            if (!clickedContact.phoneNumber.isNullOrEmpty()) {
+            if (clickedContact.phoneNumber.isNotEmpty()) {
                 val intent = Intent(Intent.ACTION_DIAL)
                 intent.data = Uri.parse("tel:${clickedContact.phoneNumber}")
                 startActivity(intent)

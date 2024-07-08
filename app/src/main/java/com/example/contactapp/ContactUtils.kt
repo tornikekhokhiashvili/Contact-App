@@ -13,7 +13,6 @@ object ContactUtils {
             ContactsContract.CommonDataKinds.Phone.NUMBER,
             ContactsContract.CommonDataKinds.Phone.PHOTO_URI
         )
-
         val cursor = contentResolver.query(
             ContactsContract.CommonDataKinds.Phone.CONTENT_URI,
             projection,
@@ -21,18 +20,15 @@ object ContactUtils {
             null,
             null
         )
-
         cursor?.use { data ->
             while (data.moveToNext()) {
                 val name = data.getString(data.getColumnIndex(ContactsContract.CommonDataKinds.Phone.DISPLAY_NAME))
                 val phoneNumber = data.getString(data.getColumnIndex(ContactsContract.CommonDataKinds.Phone.NUMBER))
                 val photoUri = data.getString(data.getColumnIndex(ContactsContract.CommonDataKinds.Phone.PHOTO_URI))
-
                 val contact = Contact(name, phoneNumber, photoUri)
                 contactsList.add(contact)
             }
         }
-
         return contactsList
     }
 }

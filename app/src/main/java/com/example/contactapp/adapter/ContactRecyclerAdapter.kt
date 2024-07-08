@@ -31,7 +31,6 @@ class ContactRecyclerAdapter(
         val view = inflater.inflate(R.layout.item_view, parent, false)
         return ContactViewHolder(view)
     }
-
     override fun onBindViewHolder(holder: ContactRecyclerAdapter.ContactViewHolder, position: Int) {
         val contact = contacts[position]
         holder.nameTextView.text = contact.name
@@ -45,7 +44,6 @@ class ContactRecyclerAdapter(
             itemClickListener.onItemClick(contact)
         }
     }
-
     override fun getItemCount(): Int {
         return contacts.size
     }

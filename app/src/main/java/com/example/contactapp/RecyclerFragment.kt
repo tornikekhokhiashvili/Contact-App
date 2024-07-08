@@ -1,5 +1,6 @@
 package com.example.contactapp
 
+import android.annotation.SuppressLint
 import android.content.Intent
 import android.net.Uri
 import android.os.Bundle
@@ -13,6 +14,7 @@ import com.example.contactapp.adapter.ContactRecyclerAdapter
 
 class RecyclerFragment : Fragment(),ContactRecyclerAdapter.OnItemClickListener {
     private lateinit var recyclerView: RecyclerView
+    @SuppressLint("NotifyDataSetChanged")
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
@@ -27,7 +29,7 @@ class RecyclerFragment : Fragment(),ContactRecyclerAdapter.OnItemClickListener {
     }
 
     override fun onItemClick(contact: Contact) {
-        if (!contact.phoneNumber.isNullOrEmpty()) {
+        if (contact.phoneNumber.isNotEmpty()) {
             val intent = Intent(Intent.ACTION_DIAL)
             intent.data = Uri.parse("tel:${contact.phoneNumber}")
             startActivity(intent)

@@ -35,7 +35,6 @@ class MainActivity : AppCompatActivity() {
                 Toast.makeText(this, "Contacts permission required for the app", Toast.LENGTH_SHORT).show()
             }
         }
-
         permissionLauncher.launch(Manifest.permission.READ_CONTACTS)
     }
     private fun init(){
